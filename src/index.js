@@ -1,4 +1,5 @@
 const KEYWORD_TAG = '{keyword}';
+const DEFAULT_HIGHLIGHT_COLOR = 'yellow';
 
 function init() {
   const searchInput = getSearchInputEle($docsify.search.placeholder);
@@ -28,7 +29,7 @@ function init() {
             articleNodes.forEach(function (aNode) {
               const keywordRe = new RegExp(keyword, 'g');
               const tagRe = new RegExp(KEYWORD_TAG, 'g');
-              const replaceText = `<span style="background-color: yellow;">${keyword}</span>`;
+              const replaceText = `<span style="background-color: ${$docsify.searchHighlightColor};">${keyword}</span>`;
 
               if (aNode.innerHTML.match(keywordRe)) {
                 if (!foundFirstNode) {
@@ -105,7 +106,7 @@ function replaceKeywordToTag(node, keyword, tag = KEYWORD_TAG) {
 }
 
 function removeHighlight(node) {
-  const highlightRe = new RegExp('<span[^>]*style\\s*=\\s*["\'][^"\']*background-color\\s*:\\s*yellow[^"\']*["\'][^>]*>(.*?)<\\/span>', 'g');
+  const highlightRe = new RegExp(`<span[^>]*style\\s*=\\s*["'][^"']*background-color\\s*:\\s*${$docsify.searchHighlightColor}[^"']*["'][^>]*>(.*?)<\\/span>`, 'g');
 
   if (node.innerHTML.match(highlightRe)) {
     node.innerHTML = node.innerHTML.replace(highlightRe, '$1');
@@ -116,6 +117,10 @@ function searchHighlighter(hook) {
   if (!$docsify.search || !$docsify.search.placeholder) {
     console.error('[search-highlighter] $docsify.search.placeholder is required.');
     return;
+  }
+
+  if (!$docsify.searchHighlightColor) {
+    $docsify.searchHighlightColor = DEFAULT_HIGHLIGHT_COLOR;
   }
 
   hook.doneEach(init);
