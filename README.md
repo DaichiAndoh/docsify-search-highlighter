@@ -14,8 +14,7 @@
 
 ## Usage
 
-このプラグインは、docsifyの検索機能を前提としているため、[docsifyの検索機能を有効化](https://docsify.js.org/#/plugins?id=full-text-search)する必要があります。<br>
-`search.placeholder` を必ず設定してください。
+このプラグインは、docsifyの検索機能を前提としているため、[docsifyの検索機能を有効化](https://docsify.js.org/#/plugins?id=full-text-search)する必要があります。`search.placeholder` を必ず設定してください。
 
 `searchHighlightColor` はこのプラグイン専用の設定値になります。
 このプロパティで、ハイライト色を指定できます。<br>
